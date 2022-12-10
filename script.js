@@ -1,3 +1,8 @@
+// initialise button vairables
+let blackButton = document.querySelector(".black-button");
+let rainbowButton = document.querySelector(".rainbow-button");
+let eraserButton = document.querySelector(".eraser-button");
+let clearButton = document.querySelector(".clear-button");
 // initialise slider value
 let slider = document.querySelector(".slider");
 let gridNum = document.querySelector(".slider-text");
@@ -27,7 +32,7 @@ function createBoard(num){
         box.style.height = `calc(400px / ${num})`;
         box.style.width = `calc(400px / ${num})`;
         box.style.backgroundColor = "white";
-        box.addEventListener("mouseover", rainbowHover)
+        box.addEventListener("mouseover", blackHover)
         board.appendChild(box);
     }
 
@@ -36,6 +41,7 @@ function createBoard(num){
 
 function blackHover(){
     this.style.backgroundColor = "black";
+
 }
 
 function rainbowHover(){
@@ -44,8 +50,51 @@ function rainbowHover(){
 }
 
 function eraseHover(){
-
+    this.style.backgroundColor = "white";
 }
-function clear(){
 
-}
+blackButton.addEventListener("click", () => {
+    let board = document.querySelector(".board");
+    let box = board.childNodes;
+    console.log(box.length);
+    for (let i = 0; i < box.length - 1; i++)
+    {
+        box[i].removeEventListener("mouseover",blackHover);
+        box[i].removeEventListener("mouseover",rainbowHover);
+        box[i].removeEventListener("mouseover",eraseHover);
+        box[i].addEventListener("mouseover", blackHover);
+    }
+})
+
+rainbowButton.addEventListener("click", () => {
+    let board = document.querySelector(".board");
+    let box = board.childNodes;
+    console.log(box.length);
+    for (let i = 0; i < box.length - 1; i++)
+    {
+        box[i].removeEventListener("mouseover",blackHover);
+        box[i].removeEventListener("mouseover",rainbowHover);
+        box[i].removeEventListener("mouseover",eraseHover);
+        box[i].addEventListener("mouseover", rainbowHover);
+    }
+})
+
+eraserButton.addEventListener("click", () => {
+    let board = document.querySelector(".board");
+    let box = board.childNodes;
+    console.log(box.length);
+    for (let i = 0; i < box.length - 1; i++)
+    {
+        box[i].removeEventListener("mouseover",blackHover);
+        box[i].removeEventListener("mouseover",rainbowHover);
+        box[i].removeEventListener("mouseover",eraseHover);
+        box[i].addEventListener("mouseover", eraseHover);
+    }
+})
+
+clearButton.addEventListener("click", () => {
+    createBoard(slider.value);
+});
+
+
+
